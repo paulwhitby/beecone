@@ -36,6 +36,7 @@
 		2D3AE78E1B48192300C94974 /* beeconeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = beeconeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D3AE7931B48192300C94974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D3AE7941B48192300C94974 /* beeconeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = beeconeTests.swift; sourceTree = "<group>"; };
+		2D3AE79E1B481F0D00C94974 /* UUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUID.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +80,7 @@
 			children = (
 				2D3AE77E1B48192300C94974 /* AppDelegate.swift */,
 				2D3AE7801B48192300C94974 /* ViewController.swift */,
+				2D3AE79E1B481F0D00C94974 /* UUID.swift */,
 				2D3AE7821B48192300C94974 /* Main.storyboard */,
 				2D3AE7851B48192300C94974 /* Images.xcassets */,
 				2D3AE7871B48192300C94974 /* LaunchScreen.xib */,

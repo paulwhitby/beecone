@@ -51,10 +51,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate
     {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.myBeacon.text = "Searching..."
+        self.beaconInRange(false, withMessage:"Searching...")
         self.didSomething.text = ""
-        self.doSomethingState.enabled = false
-        self.doSomethingState.hidden = true
         
         self.locationManager.delegate = self
         self.locationManager.requestAlwaysAuthorization()
@@ -75,6 +73,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     func beaconInRange(isInRange:Bool)
     {
@@ -97,7 +96,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate
             // got at least one beacon
 //            self.myBeacon.text = foundBeacon.major.description + ":" + foundBeacon.minor.description + " (" + foundBeacon.rssi.description + "dB)"
 //            self.myBeacon.text = foundBeacon.major == 22 ? "You are Upstairs (" + foundBeacon.rssi.description + "db)" : "You are Downstairs (" + foundBeacon.rssi.description + "db)"
-//            self.myBeacon.text = "Home"
+
             self.beaconInRange(true, withMessage:"Home")
             
             if !self.timerRunning
@@ -110,7 +109,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate
         {
             if !self.timerRunning
             {
-//                self.myBeacon.text = "Not home"
                 self.beaconInRange(false, withMessage:"Not home")
                 self.didSomething.text = ""
             }
@@ -120,49 +118,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager!, rangingBeaconsDidFailForRegion region: CLBeaconRegion!, withError error: NSError!)
     {
         self.timerRunning = false
-//        self.myBeacon.text = "Searching"
         self.beaconInRange(false, withMessage:"Searching")
         self.didSomething.text = ""
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
     {
-        //        self.startButton.setTitle("Started", forState: UIControlState.Normal)
-        // collecting the most recent location from the array of locations
         if let newLocation = locations.last as? CLLocation
         {
-//            self.gpsSpeed = metresPerSecToMilesPerHour(newLocation.speed)
-//            if self.gpsSpeed >= floatingZero
-//            {
-//                self.sampleCount++
-//                self.gpsSpeedTotal += self.gpsSpeed
-//                if sampleCount > floatingZero
-//                {
-//                    self.gpsAverageSpeed = gpsSpeedTotal / sampleCount
-//                }
-//            }
-//            self.startButton.setTitle("Start", forState: UIControlState.Normal)
-//            self.spinner.stopAnimating()
-//            updateSpeedDisplay(self.gpsSpeed, average:self.gpsAverageSpeed)
         }
         else
         {
-//            self.speed.text = " * "
-//            self.averageSpeed.text = " * "
         }
-        self.locationManager.stopUpdatingLocation()
+//        self.locationManager.stopUpdatingLocation()
     }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!)
     {
-//        self.speed.text = noSignal
-//        self.averageSpeed.text = noSignal
-//        self.gpsSpeed = floatingZero
-//        self.gpsAverageSpeed = floatingZero
-//        self.sampleCount = floatingZero
-//        self.gpsSpeedTotal = floatingZero
-//        self.spinner.startAnimating()
-        self.locationManager.stopUpdatingLocation()
+//        self.locationManager.stopUpdatingLocation()
     }
 
 }

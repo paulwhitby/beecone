@@ -36,7 +36,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate
     
     @objc func timerFireMethod(timer:NSTimer)
     {
-        // 10s has elapsed
+        // kTimeInterval has elapsed since a beacon region was detected
         self.timerRunning = false
     }
 
@@ -76,6 +76,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate
         // Dispose of any resources that can be recreated.
     }
     
+    func beaconInRange(isInRange:Bool)
+    {
+        self.isInBeaconRange = isInRange
+        self.doSomethingState.enabled = self.isInBeaconRange
+        self.doSomethingState.hidden = !self.isInBeaconRange
+    }
+    
+    func beaconInRange(isInRange:Bool, withMessage aMessage:String)
+    {
+        self.beaconInRange(isInRange)
+        self.myBeacon.text = aMessage
+    }
+    
     
     func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!)
     {
@@ -84,10 +97,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate
             // got at least one beacon
 //            self.myBeacon.text = foundBeacon.major.description + ":" + foundBeacon.minor.description + " (" + foundBeacon.rssi.description + "dB)"
 //            self.myBeacon.text = foundBeacon.major == 22 ? "You are Upstairs (" + foundBeacon.rssi.description + "db)" : "You are Downstairs (" + foundBeacon.rssi.description + "db)"
-            self.myBeacon.text = "Home"
-            self.isInBeaconRange = true
-            self.doSomethingState.enabled = true
-            self.doSomethingState.hidden = false
+//            self.myBeacon.text = "Home"
+            self.beaconInRange(true, withMessage:"Home")
             
             if !self.timerRunning
             {
@@ -99,11 +110,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate
         {
             if !self.timerRunning
             {
-                self.myBeacon.text = "Not home"
-                self.isInBeaconRange = false
-                self.doSomethingState.enabled = false
+//                self.myBeacon.text = "Not home"
+                self.beaconInRange(false, withMessage:"Not home")
                 self.didSomething.text = ""
-                self.doSomethingState.hidden = true
             }
         }
     }
@@ -111,8 +120,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager!, rangingBeaconsDidFailForRegion region: CLBeaconRegion!, withError error: NSError!)
     {
         self.timerRunning = false
-        self.myBeacon.text = "Searching"
-        self.isInBeaconRange = false
+//        self.myBeacon.text = "Searching"
+        self.beaconInRange(false, withMessage:"Searching")
+        self.didSomething.text = ""
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
